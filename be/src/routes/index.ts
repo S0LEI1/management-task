@@ -1,0 +1,11 @@
+import express, { Request, Response } from 'express';
+import { accessRouter } from './access/access.routes';
+import { apiKey, permission } from '../auth/checkAuth';
+import { PermissionEnum } from '../models/apikey.model';
+import { taskRouter } from './tasks/task.routes';
+import { userRouter } from './users/user.routes';
+const router = express.Router();
+router.use('/v1/api', accessRouter);
+router.use('/v1/api/tasks', taskRouter);
+router.use('/v1/api/users', userRouter);
+export { router as indexRouter };

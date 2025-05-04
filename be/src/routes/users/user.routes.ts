@@ -1,0 +1,11 @@
+import express, { Request, Response } from 'express';
+import { authentication } from '../../auth/authUtils';
+import { permission } from '../../auth/checkAuth';
+import { UserRole } from '../../core/const';
+import { asyncHandler } from '../../helpers/asyncHandler';
+import { UserController } from '../../controllers/user.controller';
+const router = express.Router();
+router.use(authentication);
+router.use(permission(UserRole.WRITER));
+router.get('', asyncHandler(UserController.getListUser));
+export { router as userRouter };
